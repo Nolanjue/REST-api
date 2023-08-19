@@ -7,12 +7,12 @@ const router = express.Router();
 
 
 router.get('/obtain',getPayment)
-//router calls a function, may need to specify another url in case the call is the same.
+
 router.post('/send', sendPayment)
 
 
 
-//we should use "req.params { id: 2}"
+
 
 router.get('/found/:id', foundPayment)
 
