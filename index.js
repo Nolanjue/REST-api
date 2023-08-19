@@ -5,6 +5,7 @@ import inputRoutes from './routers/input.js'
 
 //simple project to understand apis and responses
 const app = express();
+payment = []
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -13,15 +14,15 @@ app.use('/api/input', inputRoutes)
 //using routes to better organize different requests
 //api request goes from: app.use url + router url with query function called
 
-//ex: /api/users/users returns hello
 
 
 
-/*app.get('/', (req, res)=> {
-    res.json(payment) //only one works, you can also have data parsed(automatically raw)
-    //good to define everything in app in small applications
+app.get('/', (req, res)=> {
+    res.json(payment) 
+    /*good to define everything in app in small applications, 
+    however its good to use routers -> controllers to organize an application*/
 });
-*/
+
 
 
 app.listen(8800, () => {
