@@ -4,7 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 
 
 let payments = [
-    /* some sample data:
+    /* some sample data that represents a table:
     {
         total_cost: 12.99,
         tax: 1.99,
@@ -22,17 +22,15 @@ let payments = [
 export const getPayment = (req, res) => {
 
     res.json(payments)
-    //we can also use export const functions in another file to organize controllers
+    
 }
 
 export const sendPayment = (req, res) => {
-    const account = req.body;//represents the data being posted
+    const account = req.body;//represents the data being added.
     const accountId = {...account, id: uuidv4()}
 
     payments.push(accountId) //represents insert query
 
-     /*also good practice to have ids, to you can easily fetch specific data, uuid allows
-    an identifiable id depending on the version*/
 
     res.json(`new payment of ${account.total_cost} received!`)
     /*replace with queries to your database, good to test if endpoints work through
@@ -40,9 +38,14 @@ export const sendPayment = (req, res) => {
    
 }
 
-export const foundPayment = (req, res) => {
-    const {id} = req.params;
+ /*also good practice to have ids, to you can easily fetch specific data, uuid allows
+    an identifiable id depending on the version, */
 
+ //note,the object with the value in ":id", ex: /delete/1 is will delete user with id 1.
+
+export const foundPayment = (req, res) => {
+    const {id} = req.params;//params is the value in url to identify the data you want to mutate
+    
     const foundRecord = payments.find((payment) => payment.id === id)
     res.json(foundRecord) //returning in json our found user.
 }
@@ -51,7 +54,7 @@ export const foundPayment = (req, res) => {
 
 export const deletePayment = (req, res) => {
 
-    const {id} = req.params;//params is the value in url to identify the data you want to mutate
+    const {id} = req.params;
 
         payments = payments.filter((payment) => payment.id != id)
 
@@ -59,7 +62,7 @@ export const deletePayment = (req, res) => {
         
     res.json(`payment with id: ${id} has been deleted`);
 
-    //note,the object with the value in ":id", ex: /delete/1 is will delete user with id 1.
+   
 }
 
 export const updatePayment = (req, res) => {
